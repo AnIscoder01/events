@@ -82,13 +82,13 @@ final class ClientController extends AbstractController
         return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/inscriptions', name: 'client_inscriptions',methods: ["GET"])]
-    public function searchInscriptionsByIdClient(Request $r, EntityManagerInterface $em,int $id):Response
+    #[Route('/event/{id}', name: 'client_events')]
+    public function clientEvents($id, EntityManagerInterface $em)
     {
-        $q=$em->createQuery('select i from App\Entity\Inscription i where i.client= :clientId');
-        $q->setParameter('clientId',$id);
+        $q=$em->createQuery('select i from App\Entity\Inscription i JOIN  i.event e where i.client= :idc  ');
+        $q->setParameter('idc',$id);
         $inscriptions=$q->getResult();
-        return $this->render('client/inscriptions.html.twig',["inscriptions"=>$inscriptions]);
+        return $this->render('/client/events.html.twig',["listeI"=>$inscriptions]);
     }
 
 
