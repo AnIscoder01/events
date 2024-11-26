@@ -1,0 +1,22 @@
+<table border="1">
+    <tr>
+        <td>Date Debut</td>
+        <td>Date Fin</td>
+        <td>Lieu</td>
+        <td>Nom</td>
+        <td>Categorie</td>
+        <td colspan="2">Action</td>
+
+    </tr>
+    {% for e in listE %}
+    <tr>
+        <td>{{ e.dateD | date }}</td>
+        <td>{{ e.dateF | date }}</td>
+        <td>{{ e.lieu }}</td>
+        <td>{{ e.nom }}</td>
+        <td>{{ e.categorie.nom }}</td>
+        <td><a href=" {{ path('event_delete',{'id':e.id}) }}">Delete Event</a></td>
+        <td><a href=" {{ path('event_update',{'id':e.id}) }}">Update Event</a></td>
+    </tr>
+    {% endfor %}
+</table>

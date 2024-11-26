@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription index{% endblock %}
+
+{% block body %}
+    <h1>Inscription index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateI</th>
+                <th>EtatI</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for inscription in inscriptions %}
+            <tr>
+                <td>{{ inscription.id }}</td>
+                <td>{{ inscription.dateI ? inscription.dateI|date('Y-m-d') : '' }}</td>
+                <td>{{ inscription.etatI }}</td>
+                <td>
+                    <a href="{{ path('app_inscription_show', {'id': inscription.id}) }}">show</a>
+                    <a href="{{ path('app_inscription_edit', {'id': inscription.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_inscription_new') }}">Create new</a>
+{% endblock %}

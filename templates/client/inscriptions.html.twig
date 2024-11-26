@@ -1,0 +1,44 @@
+{% extends 'base.html.twig'%}
+
+{% block body %}
+    <h1>Inscriptions du client</h1>
+    <ul>
+        {% for inscription in inscriptions %}
+            <li>{{ inscription.event_id }} - {{ inscription.client_id }} ({{ inscription.date_i }})</li>
+        {% else %}
+            <li>Aucune inscription trouvée.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+    {% if listeE is empty %}
+        <div class="alert alert-warning text-center mt-4" role="alert">
+            Aucun événement trouvé pour ce client.
+        </div>
+    {% else %}
+        <div class="table-responsive mt-4">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Lieu</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for e in listeE %}
+                    <tr>
+                        <td>{{ e.id }}</td>
+                        <td>{{ e.nom }}</td>
+                        <td>{{ e.lieu }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+
+    <div class="mt-4">
+        <a href="{{ path('app_event') }}" class="btn btn-secondary">Retour à la liste des événements</a>
+    </div>
